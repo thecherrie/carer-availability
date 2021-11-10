@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./components/Card/Card";
+import TopBar from "./components/TopBar/TopBar";
+import Scheduler from "./components/Scheduler/Scheduler";
+
 
 function App() {
+
+  const [carers, setCarers] = useState();
+  const [loading, setLoading] = useState(true);
+  const [scheduling, setScheduling] = useState(null, false)
+
+  useEffect(() => {
+    const url = "https://ceracare.github.io/carers.json"
+    axios.get(url).then(
+      data => {
+        setCarers(data.data.carers)
+        setLoading(false)
+      })
+  }, [])
+
+  console.log(carers)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {scheduling ? <Scheduler name={scheduling} setScheduling={(name, val) => setScheduling(name, val)} /> : null}
+      <TopBar />
+      <div className="mainCardContainer">
+        {
+
+          loading ? <h1>Loading...</h1> :
+            carers.map(carer => {
+              return <Card setScheduling={(name, val) => setScheduling(name, val)}
+                name={carer.name}
+                slots={carer.slots}
+                image={carer.photo} />
+            })
+        }
+      </div>
+    </>
   );
 }
 

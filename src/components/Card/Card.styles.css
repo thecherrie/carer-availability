@@ -1,0 +1,29 @@
+.cardWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin:auto;
+}
+
+.cardButton {
+    background:#880E4F;
+    border:none;
+    padding:5px 10px;
+    color:white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cardPhoto {
+    object-fit: cover;
+    width: 100%; 
+    height:300px; 
+}
+
+@media screen and (min-width:768px) {
+    .cardWrapper {
+        display: flex;
+        justify-content: space-between;
+        margin:10px;
+    }
+    
+}

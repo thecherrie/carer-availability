@@ -1,0 +1,20 @@
+.topBarContainer {
+    background:#7D1E4E;
+    height: 141px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    color:white;
+    justify-content: space-between;
+}
+
+.topBarContainer p, h1 {
+    display: none;
+}
+
+@media screen and (min-width:768px) {
+    
+    .topBarContainer p, h1 {
+        display: block;
+    }
+}
